@@ -1,0 +1,92 @@
+---
+title: "Demo of RmatrixPkg::matrix_to_latex()"
+output: 
+   html_document:
+    toc: yes
+    toc_depth: 3
+params:
+  date: !r Sys.Date()    
+---
+
+```{r,setup, include=FALSE, eval=TRUE}
+options(knitr.table.format = "html", width = 140)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 8)
+```
+
+<div>Author: Rick Dean</div>
+<div>Article date: `r params$date`</div>
+
+```{r, warning=FALSE, message=FALSE}
+library(knitr)
+library(RmatrixPkg)
+```
+
+
+## Integer matrix with argument defaults
+```{r}
+A <- rbind(c(4, 2, 3),
+           c(7, 5, 8))
+A_matrix_str <- RmatrixPkg::matrix_to_latex(
+  x = A)
+```
+
+`r A_matrix_str`
+
+## Decimals matrix showing fractions with parenthesis bracket
+```{r}
+B <- rbind(c(3/4, .75, 99.3),
+           c(25L, 1.75, 2/10))
+B_matrix_str <- RmatrixPkg::matrix_to_latex(
+  x = B, 
+  bracket_type = "paren",  
+  fractions = T,
+  matrix_name = "B",
+  centered = T)
+```
+
+`r B_matrix_str`
+
+## Small in-line matrix
+```{r}
+C <- rbind(c(23, 42, 61),
+           c(78, 343, 622),
+           c(99, 101, 87))
+C_matrix_str <- RmatrixPkg::matrix_to_latex(
+  x = C, 
+  small_inline = T,  
+  bracket_type = "curly_bracket",
+  matrix_name = "C")
+```
+
+`r paste0("A small matrix ", C_matrix_str," is in-line.")`
+
+## A numeric data frame as input
+```{r}
+D_df <- data.frame(
+  col_1 = c(0.33, 1/5, 22),
+  col_2 = c(16.2, 42, 1/20),
+  col_3 = c(12, 0.60, 81/9)
+)
+D_matrix_str <- RmatrixPkg::matrix_to_latex(
+  x = D_df, 
+  bracket_type = "verts", 
+  fractions = T,
+  matrix_name = "D",
+  centered = T)
+```
+
+`r D_matrix_str`
+
+## A numeric vector as input
+```{r}
+V <- c(55.3, 32, 36/6, 92, 3/4)
+V_matrix_str <- RmatrixPkg::matrix_to_latex(
+  x = V, 
+  bracket_type = "double_verts",
+  matrix_name = "V",
+  centered = T)
+```
+
+`r V_matrix_str`
+
+

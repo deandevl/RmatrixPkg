@@ -1,0 +1,97 @@
+---
+title: "Demo of RmatrixPkg::plot_vector_2d()"
+output: 
+   html_document:
+    toc: yes
+    toc_depth: 3
+params:
+  date: !r Sys.Date()    
+---
+
+```{r,setup, include=FALSE, eval=TRUE}
+options(knitr.table.format = "html", width = 140)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 8)
+```
+
+<div>Author: Rick Dean</div>
+<div>Article date: `r params$date`</div>
+
+```{r, warning=FALSE, message=FALSE}
+library(knitr)
+library(RmatrixPkg)
+library(graphics)
+```
+
+## Simple vector display
+```{r}
+RmatrixPkg::plot_vector_2d(to = matrix(c(3, 2), ncol = 2), vector_labels = "V(3,2)")
+```
+
+## Plot the sum of two vectors
+```{r}
+v1 <- c(3,-1)
+v2 <- c(-2,3)
+v3 <- v1 + v2
+to <- matrix(c(v1, v2, v3), ncol = 2, byrow = T)
+vector_labels <- c("(3,-1)", "(-2,3)", "(1,2)")
+vector_colors <- c("black", "black", "red")
+vector_widths <- c(1, 1, 2)
+vector_linetypes <- c("solid", "solid", "dotted")
+RmatrixPkg::plot_vector_2d(
+  to = to, 
+  vector_labels = vector_labels, 
+  vector_colors = vector_colors, 
+  vector_widths = vector_widths, 
+  vector_linetypes = vector_linetypes)
+```
+
+## Multiple vector by scalars
+```{r}
+v0 <- c(3,1)
+v1 <- .5 * v0
+v2 <- 2 * v0
+v3 <- 3 * v0
+v4 <- -1 * v0
+
+to <- matrix(c(v0,v1,v2,v3,v4), ncol = 2, byrow = T)
+vector_labels <- c("v(3,1)", ".5v", "2v", "3v", "-1v")
+vector_colors <- c("red", rep("black", 4))
+vector_widths <- c(2.5, 1, 1, 1, 1)
+RmatrixPkg::plot_vector_2d(
+  to = to, 
+  vector_labels = vector_labels, 
+  vector_colors = vector_colors, 
+  vector_widths = vector_widths,  
+  x_breaks = c(-4,10,2))
+```
+
+## Plot the projection of one vector onto another
+
+Projection of *x_vec* onto *v_vec*
+
+```{r, fig.width=12, fig.height=12}
+v_vec <- c(4, 2)
+x_vec <- c(7, 6)
+proj_lst <- RmatrixPkg::proj_vector(v = v_vec, x = x_vec)
+
+v_vec <- c(0, 0, 4, 2)
+x_vec <- c(0, 0, 7, 6)
+p_vec <- c(0, 0, proj_lst[1], proj_lst[2])
+c_vec <- c(7, 6, proj_lst[1], proj_lst[2])
+
+from_to <- matrix(c(v_vec, x_vec, p_vec, c_vec), ncol = 4, byrow = T)
+vector_labels <- c("v(4,2)", "x(7,6)", "p(8,4)", "")
+vector_colors <- c("red", "black", "black", "black")
+vector_widths <- c(2.5, 1, 1, 1)
+vector_linetypes <- c("solid","dashed","solid","solid")
+RmatrixPkg::plot_vector_2d(
+  from_to = from_to, 
+  vector_labels = vector_labels,
+  vector_colors = vector_colors,
+  vector_widths = vector_widths,
+  vector_linetypes = vector_linetypes,
+  x_breaks = c(-1,10,1),
+  y_breaks = c(-1,10,1)
+)
+```
+

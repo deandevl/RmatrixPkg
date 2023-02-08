@@ -1,0 +1,70 @@
+---
+title: "Demo of RmatrixPkg::proj_vector()"
+output: 
+   html_document:
+    toc: yes
+    toc_depth: 3
+params:
+  date: !r Sys.Date()    
+---
+
+```{r,setup, include=FALSE, eval=TRUE}
+options(knitr.table.format = "html", width = 140)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 8)
+```
+
+<div>Author: Rick Dean</div>
+<div>Article date: `r params$date`</div>
+
+```{r, warning=FALSE, message=FALSE}
+library(knitr)
+library(RmatrixPkg)
+```
+
+
+
+## Define two vectors
+```{r, fig.width=12, fig.height=12}
+v_vec <- c(4, 2)
+x_vec <- c(7, 6)
+
+to_vectors <- rbind(v_vec, x_vec)
+to_labels <- c("v_vec(4,2)", "x_vec(7,6)")
+RmatrixPkg::plot_vector_2d(
+  to = to_vectors, 
+  vector_labels = to_labels,
+  x_breaks = c(-1,10,1),
+  y_breaks = c(-1,10,1)
+)
+```
+
+## Project *x_vec* onto *v_vec*
+```{r}
+v_vec <- c(4, 2)
+x_vec <- c(7, 6)
+
+proj_x <- RmatrixPkg::proj_vector(x = x_vec, v = v_vec)
+proj_str <- RmatrixPkg::matrix_to_latex(x = proj_x)
+```
+
+The projection is located at `r proj_str`
+
+```{r, fig.width=12, fig.height=12}
+v_vec <- c(0, 0, 4, 2)
+x_vec <- c(0, 0, 7, 6)
+p_vec <- c(0, 0, proj_x[1], proj_x[2])
+c_vec <- c(7, 6, proj_x[1], proj_x[2])
+
+from_to <- rbind(v_vec, x_vec, p_vec, c_vec)
+from_to_labels <- c("v_vec(4,2)", "x_vec(7,6)", "p_vec(8,4)", "")
+vector_colors <- c("red", "black", "black", "blue")
+RmatrixPkg::plot_vector_2d(
+  from_to = from_to, 
+  vector_labels = from_to_labels,
+  vector_colors = vector_colors,
+  x_breaks = c(-1,10,1),
+  y_breaks = c(-1,10,1)
+)
+```
+
+
