@@ -1,7 +1,6 @@
-dot_demo                      Demo of RmatrixPkg::dot(v1, v2)
 E_norm_demo                   Demo of RmatrixPkg::E_norm(X)
 ls_rank_demo                  Demo of RmatrixPkg::Is_rank(A,b)
-plot_linear_equation_3d_demo  Demo of RmatrixPkg::plot_linear_equation_3d()
+plot_vector_2d_demo           Demo of RmatrixPkg::plot_vector_2d()
 plot_lines_3d_demo            Demo of RmatrixPkg::plot_lines_3d()
 plot_points_3d_demo           Demo of RmatrixPkg::plot_points_3d()
 qr_gs_demo                    Demo of RmatrixPkg::qr_gs()

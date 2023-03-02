@@ -1,19 +1,19 @@
-#' Function converts numeric matrix to Latex format
+#' Function converts numeric/character matrix or data frame to Latex format
 #'
 #' @description Function returns a Latex formatted matrix for Rmarkdown documents.
 #'
 #'  Create the Latex string by calling the function:
 #'  \code{A_matrix_str = matrix_to_latex(A)}. The matrix string could then
-#'  be used in an in-line Rmarkdown statement:
-#'  \code{` paste0("$$", "\\textbf{A} =", A_matrix_str, "$$"`}.
+#'  be used directly in a Rmarkdown document, surrounding latex "$" signs included.
 #'
-#' @param x A numeric vector, matrix, data frame.
+#' @param x A numeric/character vector, matrix, data frame.
 #' @param bracket_type A string that set the bracket type. Acceptable values are
 #'  "none", "bracket", "paren", "curly_bracket", "verts",
 #'  "double_verts".
 #' @param small_inline A logical which if \code{TRUE} creates an inline small matrix.
 #' @param fractions A logical which if \code{TRUE} will express non-integers
 #'  as rational numbers.
+#' @param digits The number of rounded digits for the numeric values.
 #' @param matrix_name A string that sets the name of the matrix.
 #' @param centered A logical which if \code{TRUE} creates Rmarkdown that centers the matrix.
 #'
@@ -27,6 +27,7 @@ matrix_to_latex <- function(
   bracket_type = "bracket",
   small_inline = FALSE,
   fractions = FALSE,
+  digits = 2,
   matrix_name = NULL,
   centered = FALSE
 ){
@@ -49,6 +50,14 @@ matrix_to_latex <- function(
   }
 
   a_matrix <- as.matrix(x)
+  for(i in 1:nrow(a_matrix)){
+    for(j in 1:ncol(a_matrix)){
+      if(is.numeric(a_matrix[i,j])){
+        a_matrix[i,j] <- round(a_matrix[i,j], digits = digits)
+      }
+    }
+  }
+
   if(!fractions){
     rows <- apply(a_matrix, MARGIN = 1, paste, collapse = " & ")
     matrix_str <- paste(rows, collapse = " \\\\ ")

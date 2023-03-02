@@ -20,7 +20,6 @@
 #' @param y_breaks A numeric three element vector of upper, lower, and interval for exact y axis tic locations.
 #' @param x_title A string that sets the x axis title.
 #' @param y_title A string that sets the y axis title.
-#' @param width_height A two element numeric vector that defines the plot's x/y dimensions in inches.
 #' @param char_mag A numeric that defines the magnification of the vector's label size.
 #'
 #' @importFrom graphics text
@@ -44,7 +43,6 @@ plot_vector_2d <- function(
   y_breaks = c(-5,5,1),
   x_title = "X",
   y_title = "Y",
-  width_height = c(6,6),
   char_mag = 1.5){
     # check the number of columns for "from_to" and "to"
     if(!is.null(to)){
@@ -186,6 +184,7 @@ plot_vector_2d <- function(
         )
       }
     }
+
     if(!is.null(vector_labels) & !is.null(to)){
       for(i in 1:nrow(to)){
         graphics::text(

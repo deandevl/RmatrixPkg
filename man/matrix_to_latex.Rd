@@ -2,19 +2,20 @@
 % Please edit documentation in R/matrix_to_latex.R
 \name{matrix_to_latex}
 \alias{matrix_to_latex}
-\title{Function converts numeric matrix to Latex format}
+\title{Function converts numeric/character matrix or data frame to Latex format}
 \usage{
 matrix_to_latex(
   x = NULL,
   bracket_type = "bracket",
   small_inline = FALSE,
   fractions = FALSE,
+  digits = 2,
   matrix_name = NULL,
   centered = FALSE
 )
 }
 \arguments{
-\item{x}{A numeric vector, matrix, data frame.}
+\item{x}{A numeric/character vector, matrix, data frame.}
 
 \item{bracket_type}{A string that set the bracket type. Acceptable values are
 "none", "bracket", "paren", "curly_bracket", "verts",
@@ -24,6 +25,8 @@ matrix_to_latex(
 
 \item{fractions}{A logical which if \code{TRUE} will express non-integers
 as rational numbers.}
+
+\item{digits}{The number of rounded digits for the numeric values.}
 
 \item{matrix_name}{A string that sets the name of the matrix.}
 
@@ -37,8 +40,7 @@ Function returns a Latex formatted matrix for Rmarkdown documents.
 
 Create the Latex string by calling the function:
 \code{A_matrix_str = matrix_to_latex(A)}. The matrix string could then
-be used in an in-line Rmarkdown statement:
-\code{` paste0("$$", "\\textbf{A} =", A_matrix_str, "$$"`}.
+be used directly in a Rmarkdown document, surrounding latex "$" signs included.
 }
 \author{
 Rick Dean

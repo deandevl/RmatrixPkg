@@ -10,7 +10,7 @@ params:
 
 ```{r,setup, include=FALSE, eval=TRUE}
 options(knitr.table.format = "html", width = 140)
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 8)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 8)
 ```
 
 <div>Author: Rick Dean</div>

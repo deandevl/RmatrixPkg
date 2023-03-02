@@ -10,7 +10,7 @@ params:
 
 ```{r,setup, include=FALSE, eval=TRUE}
 options(knitr.table.format = "html", width = 140)
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 12, fig.height = 8)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 8)
 ```
 
 <div>Author: Rick Dean</div>
@@ -18,8 +18,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width =
 
 ```{r, warning=FALSE, message=FALSE}
 library(knitr)
-library(RmatrixPkg)
 library(graphics)
+library(RmatrixPkg)
 ```
 
 ## Simple vector display
@@ -92,6 +92,22 @@ RmatrixPkg::plot_vector_2d(
   vector_linetypes = vector_linetypes,
   x_breaks = c(-1,10,1),
   y_breaks = c(-1,10,1)
+)
+```
+
+Plot a pair of vectors are 90 degrees apart(dot product = 0)
+```{r}
+u <- c(2, 5)
+v <- c(5, -2)
+
+to_vectors <- rbind(u,v)
+to_labels <- c("(2,5)", "(5,-2)")
+RmatrixPkg::plot_vector_2d(
+  to = to_vectors, 
+  vector_labels = to_labels,
+  x_breaks = c(-6, 6, 1),
+  y_breaks = c(-6, 6, 1),
+  char_mag = 0.8
 )
 ```
 

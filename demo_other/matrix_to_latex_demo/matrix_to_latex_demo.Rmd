@@ -22,10 +22,10 @@ library(RmatrixPkg)
 ```
 
 
-## Integer matrix with argument defaults
+## Numeric matrix with argument defaults
 ```{r}
-A <- rbind(c(4, 2, 3),
-           c(7, 5, 8))
+A <- rbind(c(4, 2.776328, 3),
+           c(7, 5, 4.76543))
 A_matrix_str <- RmatrixPkg::matrix_to_latex(
   x = A)
 ```
@@ -41,7 +41,8 @@ B_matrix_str <- RmatrixPkg::matrix_to_latex(
   bracket_type = "paren",  
   fractions = T,
   matrix_name = "B",
-  centered = T)
+  centered = T,
+  digits = 0)
 ```
 
 `r B_matrix_str`

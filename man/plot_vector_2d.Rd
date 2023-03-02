@@ -19,7 +19,6 @@ plot_vector_2d(
   y_breaks = c(-5, 5, 1),
   x_title = "X",
   y_title = "Y",
-  width_height = c(6, 6),
   char_mag = 1.5
 )
 }
@@ -54,8 +53,6 @@ Acceptable values are "blank", "solid", "dashed", "dotted", "dotdash", "longdash
 \item{x_title}{A string that sets the x axis title.}
 
 \item{y_title}{A string that sets the y axis title.}
-
-\item{width_height}{A two element numeric vector that defines the plot's x/y dimensions in inches.}
 
 \item{char_mag}{A numeric that defines the magnification of the vector's label size.}
 }
